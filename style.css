@@ -1,0 +1,98 @@
+*{
+    border: 2px solid red;
+}
+html{
+    background-color: black;
+    color: greenyellow;
+    text-align: center;
+}
+/* HEADER */
+.header{
+    font-family: Bradley Hand, cursive, sans-serif;
+}
+
+/* BODY */
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#gridLayout{
+    
+}
+
+.calcBorder{
+    border: 10px solid rgb(244, 234, 234);
+    border-radius: 25%;
+    width: 250px;
+    height: 400px;
+}
+
+.calcScreen{
+    width: 250px;
+    padding: 15px 10px 5px 10px;
+    border: solid white;
+}
+
+.cell{
+    width: 50px;
+    height: 50px;
+}
+
+.topRow{
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    
+}
+
+.topOp{
+}
+
+.numOps{
+    display: inline-flex;
+    flex-direction: row;
+}
+
+.operatorsColumn{
+
+}
+
+.operator{
+
+}
+
+.number{
+
+}
+
+.zero{
+
+}
+
+
+/* FOOTER */
+.footer{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: grey;
+    bottom:0;
+    left: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    padding: 15px;
+    position: absolute;
+    text-align: center;
+    z-index: 1;
+    }
+.fa-github {
+    color: greenyellow;
+    font-size: 24px;
+    transition: transform 0.3s ease-in-out;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.fa-github:hover {
+    transform: rotate(360deg) scale(1.5);
+}
