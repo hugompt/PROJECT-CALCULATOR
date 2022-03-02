@@ -11,12 +11,16 @@ html{
 /* BODY */
 body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    overflow: hidden;
 }
 
 .mainCont{
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    left: 25%;
+    right: 25%;
+    bottom: 25%;
+    margin-top: 5%;
 }
 .calcBorder{
     border: 10px solid rgb(244, 234, 234);
@@ -27,20 +31,25 @@ body{
     right: 50%;
 }
 
+.hiddenCont{
+    width: 215px;
+}
+
 .calcScreen{
-    width: 190px;
     height: 60px;
     padding: 15px 10px 5px 10px;
     font-size: 22px;
-    border: solid white;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
     font-size: 50px;
+    flex-grow: 0;
+    border: solid white;
 }
 
 .cell{
     display: flex;
+    cursor: pointer;
     flex-shrink: 0;
     width: 40px;
     padding: 5px;
@@ -49,7 +58,14 @@ body{
     text-align: center;
     align-items: center;
     justify-content: center;
-    border: 2px solid white
+    border: 2px solid white;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }
 
 .topRow, .numbsTop, .numbsMid, .numbsBot{
@@ -75,7 +91,8 @@ body{
 }
 
 .operator{
-
+    background-color: greenyellow;
+    color: black;
 }
 
 .number{
@@ -86,13 +103,13 @@ body{
 /* FOOTER */
 .footer{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    bottom:0;
-    left: 0;
+    right: -15px;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     padding: 15px;
+    font-size: 15px;
     position: absolute;
     text-align: center;
     z-index: 1;
