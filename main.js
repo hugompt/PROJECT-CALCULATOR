@@ -44,10 +44,44 @@ function add (var1, var2){
     let numb1 = parseFloat(var1);
     let numb2 = parseFloat(var2);
     let result = numb1 + numb2;
-  
-    //Check if int
-    // if (result % 1 === 0){
-    //     console.log(result);
-    // }
     return result
+}
+
+//Subtract sumbers
+function subtract (var1, var2){
+    let numb1 = parseFloat(var1);
+    let numb2 = parseFloat(var2);
+    let result = numb1 - numb2;
+    return result
+}
+
+//Multiply sumbers
+function multiply (var1, var2){
+    let numb1 = parseFloat(var1);
+    let numb2 = parseFloat(var2);
+    let result = numb1 * numb2;
+    return result
+}
+
+//Divide sumbers
+function divide (var1, var2){
+    let numb1 = parseFloat(var1);
+    let numb2 = parseFloat(var2);
+    let result = numb1 / numb2;
+    return result
+}
+
+//Main function to choose witch math function to use
+function operate (var1,var2, operator){
+    let result = 0;
+    switch (operator){
+        case "+": result = add(var1,var2);
+        break;
+        case "-": result = subtract(var1,var2);
+        break;
+        case "*": result = multiply(var1,var2);
+        break;
+        case "/": result = divide(var1, var2);
+        break;
+    }
 }
