@@ -1,6 +1,10 @@
 //Global variables
 let varValue = '';
+let varValue2 = '';
+let firstNumber = true;
+let clearOrNot = false;
 let screenValue = document.querySelector('.calcScreen');
+let operatorSymbol = '';
 
 //Listen to keys pressed on the keyboard
 window.addEventListener('keydown', writeScreen);
@@ -9,24 +13,59 @@ window.addEventListener('keydown', writeScreen);
 document.getElementById("clear").addEventListener('click', function(){
     screenValue.textContent = 0;
     varValue = '';
-
+    varValue2 = '';
+    firstNumber = true;
+    clearOrNot = false;
+    operatorSymbol = '';
 });
 
 //Check if typed key is a number
 //if it is, then write it on the calculator
 //screen
 function writeScreen(e){
-    let aux1 = parseFloat(e.key);
+    let aux1 = e.key;
     screenValue = document.querySelector('.calcScreen');
+    console.log("keyCode = " + e.keyCode);
+    console.log("aux1 = " + aux1);
     if(aux1 >=0 && aux1 <=9){
-        console.log("You clicked on a number.");
-        screenValue.textContent.trim() === "0" ? screenValue.textContent = aux1 : screenValue.textContent += aux1;
-        varValue += "" + aux1;
-        console.log(varValue);
-        console.log(typeof(varValue));
-            //Still need to change the size of the font dinnamically as string grows
-    }
+        //console.log("You clicked on a number.");
+        if (screenValue.textContent.trim() === "0"){
+            screenValue.textContent = aux1;
+            varValue = aux1;
+        }else if (firstNumber == false && clearOrNot == true){
+            screenValue.textContent = aux1;
+            clearOrNot = false;
+            varValue2 = aux1;
+        }else if(firstNumber == false && clearOrNot == false){
+            screenValue.textContent += aux1;
+            varValue2 +="" + aux1;
+        }else{
+            screenValue.textContent += aux1;
+            varValue +="" + aux1;
+        }
     
+        //Still need to change the size of the font dynamically as string grows
+    }else if(aux1 == ',' && screenValue.textContent.includes('.') == false ||
+             aux1 == '.' && screenValue.textContent.includes('.') == 0){
+        screenValue.textContent += '.';
+    }else if(e.keyCode >= 106 && e.keyCode <= 109 || e.keyCode == 111){
+        operatorSymbol = e.key;
+
+        if (firstNumber = false){
+
+            firstNumber = true;
+        }else{
+            firstNumber = false;
+            clearOrNot = true
+        }
+
+        //////////////////
+        //NEEDS CHECKING//
+        //////////////////
+        if(varValue != '' && varValue2 != ''){
+            screenValue.textContent = operate(varValue,varValue2, operatorSymbol);
+        }
+    }
 }
 
 //does not work......
