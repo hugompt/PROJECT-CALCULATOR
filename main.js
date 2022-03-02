@@ -1,16 +1,23 @@
 //Global variables
 let varValue = '';
+let screenValue = document.querySelector('.calcScreen');
 
 //Listen to keys pressed on the keyboard
 window.addEventListener('keydown', writeScreen);
+
+//Function to clear the calculator display and global varibles
+document.getElementById("clear").addEventListener('click', function(){
+    screenValue.textContent = 0;
+    varValue = '';
+
+});
 
 //Check if typed key is a number
 //if it is, then write it on the calculator
 //screen
 function writeScreen(e){
     let aux1 = parseFloat(e.key);
-    let screenValue = document.querySelector('.calcScreen');
-
+    screenValue = document.querySelector('.calcScreen');
     if(aux1 >=0 && aux1 <=9){
         console.log("You clicked on a number.");
         screenValue.textContent.trim() === "0" ? screenValue.textContent = aux1 : screenValue.textContent += aux1;
