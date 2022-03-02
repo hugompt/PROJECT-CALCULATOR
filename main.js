@@ -1,21 +1,8 @@
+//Global variables
+let varValue = '';
+
 //Listen to keys pressed on the keyboard
 window.addEventListener('keydown', writeScreen);
-
-window.addEventListener()
-//function to change colors of cells that are hovered
-function changeBackColor(){
-    $('.cell').hover( 
-        function() {
-            $(this)
-            .css('color','blue')
-            .animate({'color': 'red'}, 400);
-        },
-        function() {
-            $(this)
-            .animate({'color': 'blue'}, 400);
-        }
-    );
-}
 
 //Check if typed key is a number
 //if it is, then write it on the calculator
@@ -26,8 +13,10 @@ function writeScreen(e){
 
     if(aux1 >=0 && aux1 <=9){
         console.log("You clicked on a number.");
-        screenValue.textContent.trim() === "0" ? 
-            screenValue.textContent = aux1 : screenValue.textContent += aux1;
+        screenValue.textContent.trim() === "0" ? screenValue.textContent = aux1 : screenValue.textContent += aux1;
+        varValue += "" + aux1;
+        console.log(varValue);
+        console.log(typeof(varValue));
             //Still need to change the size of the font dinnamically as string grows
     }
     

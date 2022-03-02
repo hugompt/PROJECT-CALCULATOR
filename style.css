@@ -68,6 +68,14 @@ body{
     user-select: none;
 }
 
+.cell:hover{
+    background-color: yellow;
+    color: black;
+    transform: scale(1.1);
+    text-shadow: 2px 2px grey;
+    border: 2px solid grey;
+}
+
 .topRow, .numbsTop, .numbsMid, .numbsBot{
     display: flex;
     flex-shrink: 0;
