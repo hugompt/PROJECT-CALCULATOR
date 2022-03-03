@@ -8,6 +8,7 @@ let hiddenScreen = document.querySelector('.hiddenCont');
 let operatorSymbol = '';
 let newSize = 50;
 let history = document.querySelector('.history');
+let negNum = false;
 
 //Listen to keys pressed on the keyboard
 window.addEventListener('keydown', writeScreen);
@@ -23,7 +24,7 @@ for(let i = 0; i < allCells.length; i++){
 }
 
 //Function to clear the calculator display and global varibles
-document.getElementById("clear").addEventListener('click', function(){
+document.getElementById('clear').addEventListener('click', function(){
     screenValue.textContent = 0;
     varValue = '';
     varValue2 = '';
@@ -31,6 +32,13 @@ document.getElementById("clear").addEventListener('click', function(){
     clearOrNot = false;
     operatorSymbol = '';
     history.textContent = '';
+    negNum = false;
+});
+
+//Function to change number to negative or back to positive
+document.getElementById('posNeg').addEventListener('click', function(){
+    negNum != true && (screenValue.textContent.includes('-') == false) ? screenValue.insertAdjacentText('afterBegin', '-') : screenValue.textContent = screenValue.textContent.slice(1,screenValue.textContent.length) ;
+    negNum == true ? false : true;
 });
 
 //Check if typed key is a number
@@ -44,6 +52,7 @@ function writeScreen(e){
     screenValue = document.querySelector('.calcScreen');
     if(aux1 >=0 && aux1 <=9){
         //console.log("You clicked on a number.");
+        negNum == true && (screenValue.textContent.includes('-') == false) ? (aux1 = '-' + aux1) : null ;
         if (screenValue.textContent.trim() === "0"){
             screenValue.textContent = aux1;
             varValue = aux1;
@@ -89,16 +98,6 @@ function writeScreen(e){
                 checkSize();
     }
 }
-
-//does not work......
-// function resize_to_fit() {
-//     var fontsize = $('.hiddenCont .calcScreen').css('font-size');
-//     $('.hiddenCont .calcScreen').css('fontSize', parseFloat(fontsize) - 1);
-  
-//     if ($('.hiddenCont .calcScreen').width() >= $('.hiddenCont').width()) {
-//       resize_to_fit();
-//     }
-//   }
 
 //Add sumbers
 function add (var1, var2){
@@ -174,6 +173,27 @@ function operate (var1,var2, operator){
     }
 }
 
+function checkSize (){
+    if (screenValue.textContent.length >= 10) {
+    screenValue.textContent = Number(screenValue.textContent).toExponential(2);
+    }else {
+        //Check for Infinity OR NaN in Display
+        screenValue.textContent = screenValue.textContent.includes('N') ? 'NaN' : 
+        screenValue.textContent.includes('I') ? 'Infinity' : screenValue.textContent;
+    }
+}
+
+//does not work......
+// function resize_to_fit() {
+//     var fontsize = $('.hiddenCont .calcScreen').css('font-size');
+//     $('.hiddenCont .calcScreen').css('fontSize', parseFloat(fontsize) - 1);
+  
+//     if ($('.hiddenCont .calcScreen').width() >= $('.hiddenCont').width()) {
+//       resize_to_fit();
+//     }
+//   }
+
+
 //does not work as intended, code commented out...
 // function resizeText(){   
 //     if(screenValue.textContent.length > 6){
@@ -196,13 +216,3 @@ function operate (var1,var2, operator){
 //         console.log(newSize);
 //     }
 // }
-
-function checkSize (){
-    if (screenValue.textContent.length >= 10) {
-    screenValue.textContent = Number(screenValue.textContent).toExponential(2);
-    }else {
-        //Check for Infinity OR NaN in Display
-        screenValue.textContent = screenValue.textContent.includes('N') ? 'NaN' : 
-        screenValue.textContent.includes('I') ? 'Infinity' : screenValue.textContent;
-    }
-}
