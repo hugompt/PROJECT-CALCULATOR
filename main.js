@@ -30,8 +30,7 @@ function writeScreen(e){
         if (screenValue.textContent.trim() === "0"){
             screenValue.textContent = aux1;
             varValue = aux1;
-        }else if (firstNumber == false && clearOrNot == true){
-            varValue = screenValue.textContent;
+        }else if (firstNumber == false && clearOrNot == true && operatorSymbol != ''){
             screenValue.textContent = aux1;
             clearOrNot = false;
             varValue2 = aux1;
@@ -61,7 +60,10 @@ function writeScreen(e){
             firstNumber = false;
             clearOrNot = true
         }
-    }
+    }else if(aux1 == 'Enter' && varValue != '' && varValue2 != '' 
+            && operatorSymbol != ''){
+                screenValue.textContent = operate(varValue,varValue2, operatorSymbol);
+            }
 }
 
 //does not work......
@@ -114,21 +116,25 @@ function operate (var1,var2, operator){
             result = add(var1,var2);
             varValue = result;
             varValue2 = '';
+            operatorSymbol =''
             return result
         case "-":
             result = subtract(var1,var2);
             varValue = result;
             varValue2 = '';
+            operatorSymbol =''
             return result
         case "*": 
             result =  multiply(var1,var2);
             varValue = result;
             varValue2 = '';
+            operatorSymbol =''
             return result
         case "/": 
             result = divide(var1, var2);
             varValue = result;
             varValue2 = '';
+            operatorSymbol =''
             return result
     }
 }
