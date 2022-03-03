@@ -61,6 +61,7 @@ function writeScreen(e){
              aux1 == '.' && screenValue.textContent.includes('.') == 0){
         //console.log("You clicked on a , or .");
         screenValue.textContent += '.';
+        firstNumber ? varValue += '.' : varValue2 += '.';
     
     //Checks if user clicked on a operator symbol;
     }else if(aux1 == '+' || aux1 == '-' || aux1 == '*' || aux1 == '/'){
@@ -75,8 +76,8 @@ function writeScreen(e){
             firstNumber = false;
             clearOrNot = true
         }
-    }else if(aux1 == 'Enter' || aux1 == '=' && varValue != '' && varValue2 != '' 
-            && operatorSymbol != ''){
+    }else if(aux1 == 'Enter' && varValue != '' && varValue2 != '' 
+            && operatorSymbol != '' || aux1 == '=' && varValue != '' && varValue2 != '' && operatorSymbol != ''){
                 screenValue.textContent = operate(varValue,varValue2, operatorSymbol);
     }
 }
