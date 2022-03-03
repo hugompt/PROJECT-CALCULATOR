@@ -11,7 +11,6 @@ html{
 /* BODY */
 body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    overflow: hidden;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -32,7 +31,7 @@ body{
     border: 10px solid rgb(244, 234, 234);
     border-radius: 2%;
     width: 215px;
-    height: 355px;
+    height: 352px;
     left: 50%;
     right: 50%;
 }
@@ -44,13 +43,29 @@ body{
 .calcScreen{
     height: 60px;
     padding: 15px 10px 5px 10px;
-    font-size: 22px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    font-size: 50px;
+    font-size: 30px;
     flex-grow: 0;
     border: solid white;
+    background-color: rgb(82, 82, 82);
+    text-shadow: 4px 4px black;
+    max-width: 215px;
+}
+
+.history{
+    height:23px;
+    padding-top: 10px;
+    margin-right: 10px;
+    width: 210px;
+    position: absolute;
+    font-size: 20px;
+    overflow: hidden;
+    text-align: end;
+    display: flex;
+    justify-content: flex-end;
+    white-space: nowrap;
 }
 
 .cell{

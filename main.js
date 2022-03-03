@@ -4,7 +4,10 @@ let varValue2 = '';
 let firstNumber = true;
 let clearOrNot = false;
 let screenValue = document.querySelector('.calcScreen');
+let hiddenScreen = document.querySelector('.hiddenCont');
 let operatorSymbol = '';
+let newSize = 50;
+let history = document.querySelector('.history');
 
 //Listen to keys pressed on the keyboard
 window.addEventListener('keydown', writeScreen);
@@ -27,13 +30,13 @@ document.getElementById("clear").addEventListener('click', function(){
     firstNumber = true;
     clearOrNot = false;
     operatorSymbol = '';
+    history.textContent = '';
 });
 
 //Check if typed key is a number
 //if it is, then write it on the calculator
 //screen
 function writeScreen(e){
-    console.log(e);
     let aux1;
     typeof(e) == 'string' ? aux1 = e : aux1 = e.key;
     aux1 == 'x' ? aux1 = '*' : aux1;
@@ -50,9 +53,11 @@ function writeScreen(e){
             varValue2 = aux1;
         }else if(firstNumber == false && clearOrNot == false){
             screenValue.textContent += aux1;
+            checkSize();
             varValue2 +="" + aux1;
         }else{
             screenValue.textContent += aux1;
+            checkSize();
             varValue +="" + aux1;
         }
     
@@ -61,12 +66,14 @@ function writeScreen(e){
              aux1 == '.' && screenValue.textContent.includes('.') == 0){
         //console.log("You clicked on a , or .");
         screenValue.textContent += '.';
+        checkSize();
         firstNumber ? varValue += '.' : varValue2 += '.';
     
     //Checks if user clicked on a operator symbol;
     }else if(aux1 == '+' || aux1 == '-' || aux1 == '*' || aux1 == '/'){
         if(varValue != '' && varValue2 != '' && operatorSymbol != ''){
             screenValue.textContent = operate(varValue,varValue2, operatorSymbol);
+            checkSize();
         }
         operatorSymbol = aux1;
         if (firstNumber = false){
@@ -79,6 +86,7 @@ function writeScreen(e){
     }else if(aux1 == 'Enter' && varValue != '' && varValue2 != '' 
             && operatorSymbol != '' || aux1 == '=' && varValue != '' && varValue2 != '' && operatorSymbol != ''){
                 screenValue.textContent = operate(varValue,varValue2, operatorSymbol);
+                checkSize();
     }
 }
 
@@ -97,7 +105,9 @@ function add (var1, var2){
     let numb1 = parseFloat(var1);
     let numb2 = parseFloat(var2);
     let result = numb1 + numb2;
-    return result
+    result % 1 != 0 ? result = result.toFixed(2) : result;
+    return result;
+
 }
 
 //Subtract sumbers
@@ -105,6 +115,7 @@ function subtract (var1, var2){
     let numb1 = parseFloat(var1);
     let numb2 = parseFloat(var2);
     let result = numb1 - numb2;
+    result % 1 != 0 ? result = result.toFixed(2) : result;
     return result
 }
 
@@ -113,6 +124,7 @@ function multiply (var1, var2){
     let numb1 = parseFloat(var1);
     let numb2 = parseFloat(var2);
     let result = numb1 * numb2;
+    result % 1 != 0 ? result = result.toFixed(2) : result;
     return result
 }
 
@@ -121,11 +133,13 @@ function divide (var1, var2){
     let numb1 = parseFloat(var1);
     let numb2 = parseFloat(var2);
     let result = numb1 / numb2;
+    result % 1 != 0 ? result = result.toFixed(2) : result;
     return result
 }
 
 //Main function to choose witch math function to use
 function operate (var1,var2, operator){
+    history.textContent += '('+var1 + operator + var2+')';
     let result = 0;
     switch (operator){
         case "+":
@@ -152,5 +166,38 @@ function operate (var1,var2, operator){
             varValue2 = '';
             operatorSymbol =''
             return result
+    }
+}
+
+//does not work as intended, code commented out...
+// function resizeText(){   
+//     if(screenValue.textContent.length > 6){
+//         switch(newSize){
+//             case 50:
+//             case 44:
+//             case 38:
+//             case 32:
+//                 newSize = ($('.calcScreen').css('font-size').substring(0,2)-6);
+//                 $('.calcScreen').css('font-size', newSize);
+//                 break;
+//             case 26:
+//             case 24:
+//             case 22:
+//             case 20:
+//                 newSize = ($('.calcScreen').css('font-size').substring(0,2)-2);
+//                 $('.calcScreen').css('font-size', newSize);
+
+//         }
+//         console.log(newSize);
+//     }
+// }
+
+function checkSize (){
+    if (screenValue.textContent.length >= 10) {
+    screenValue.textContent = Number(screenValue.textContent).toExponential(2);
+    }else {
+        //Check for Infinity OR NaN in Display
+        screenValue.textContent = screenValue.textContent.includes('N') ? 'NaN' : 
+        screenValue.textContent.includes('I') ? 'Infinity' : screenValue.textContent;
     }
 }
