@@ -9,6 +9,16 @@ let operatorSymbol = '';
 //Listen to keys pressed on the keyboard
 window.addEventListener('keydown', writeScreen);
 
+//Get all elements with the 'cell' class name.
+let allCells = document.getElementsByClassName('cell');
+
+for(let i = 0; i < allCells.length; i++){
+    // Event handler for mouseclick and to simulate key pressed 
+    allCells[i].addEventListener('click', function(e){  
+        writeScreen(allCells[i].textContent.substring(allCells[i].length-7)); 
+    });
+}
+
 //Function to clear the calculator display and global varibles
 document.getElementById("clear").addEventListener('click', function(){
     screenValue.textContent = 0;
@@ -23,7 +33,11 @@ document.getElementById("clear").addEventListener('click', function(){
 //if it is, then write it on the calculator
 //screen
 function writeScreen(e){
-    let aux1 = e.key;
+    console.log(e);
+    let aux1;
+    typeof(e) == 'string' ? aux1 = e : aux1 = e.key;
+    aux1 == 'x' ? aux1 = '*' : aux1;
+    aux1 == '÷'? aux1 = '/' : aux1;
     screenValue = document.querySelector('.calcScreen');
     if(aux1 >=0 && aux1 <=9){
         //console.log("You clicked on a number.");
@@ -47,12 +61,13 @@ function writeScreen(e){
              aux1 == '.' && screenValue.textContent.includes('.') == 0){
         //console.log("You clicked on a , or .");
         screenValue.textContent += '.';
-    }else if(e.keyCode >= 106 && e.keyCode <= 109 || e.keyCode == 111){
+    
+    //Checks if user clicked on a operator symbol;
+    }else if(aux1 == '+' || aux1 == '-' || aux1 == '*' || aux1 == '/'){
         if(varValue != '' && varValue2 != '' && operatorSymbol != ''){
-        //console.log("You clicked on a operator symbol");
             screenValue.textContent = operate(varValue,varValue2, operatorSymbol);
         }
-        operatorSymbol = e.key;
+        operatorSymbol = aux1;
         if (firstNumber = false){
 
             firstNumber = true;
@@ -60,10 +75,10 @@ function writeScreen(e){
             firstNumber = false;
             clearOrNot = true
         }
-    }else if(aux1 == 'Enter' && varValue != '' && varValue2 != '' 
+    }else if(aux1 == 'Enter' || aux1 == '=' && varValue != '' && varValue2 != '' 
             && operatorSymbol != ''){
                 screenValue.textContent = operate(varValue,varValue2, operatorSymbol);
-            }
+    }
 }
 
 //does not work......
