@@ -25,14 +25,13 @@ document.getElementById("clear").addEventListener('click', function(){
 function writeScreen(e){
     let aux1 = e.key;
     screenValue = document.querySelector('.calcScreen');
-    console.log("keyCode = " + e.keyCode);
-    console.log("aux1 = " + aux1);
     if(aux1 >=0 && aux1 <=9){
         //console.log("You clicked on a number.");
         if (screenValue.textContent.trim() === "0"){
             screenValue.textContent = aux1;
             varValue = aux1;
         }else if (firstNumber == false && clearOrNot == true){
+            varValue = screenValue.textContent;
             screenValue.textContent = aux1;
             clearOrNot = false;
             varValue2 = aux1;
@@ -47,23 +46,20 @@ function writeScreen(e){
         //Still need to change the size of the font dynamically as string grows
     }else if(aux1 == ',' && screenValue.textContent.includes('.') == false ||
              aux1 == '.' && screenValue.textContent.includes('.') == 0){
+        //console.log("You clicked on a , or .");
         screenValue.textContent += '.';
     }else if(e.keyCode >= 106 && e.keyCode <= 109 || e.keyCode == 111){
+        if(varValue != '' && varValue2 != '' && operatorSymbol != ''){
+        //console.log("You clicked on a operator symbol");
+            screenValue.textContent = operate(varValue,varValue2, operatorSymbol);
+        }
         operatorSymbol = e.key;
-
         if (firstNumber = false){
 
             firstNumber = true;
         }else{
             firstNumber = false;
             clearOrNot = true
-        }
-
-        //////////////////
-        //NEEDS CHECKING//
-        //////////////////
-        if(varValue != '' && varValue2 != ''){
-            screenValue.textContent = operate(varValue,varValue2, operatorSymbol);
         }
     }
 }
@@ -114,13 +110,25 @@ function divide (var1, var2){
 function operate (var1,var2, operator){
     let result = 0;
     switch (operator){
-        case "+": result = add(var1,var2);
-        break;
-        case "-": result = subtract(var1,var2);
-        break;
-        case "*": result = multiply(var1,var2);
-        break;
-        case "/": result = divide(var1, var2);
-        break;
+        case "+":
+            result = add(var1,var2);
+            varValue = result;
+            varValue2 = '';
+            return result
+        case "-":
+            result = subtract(var1,var2);
+            varValue = result;
+            varValue2 = '';
+            return result
+        case "*": 
+            result =  multiply(var1,var2);
+            varValue = result;
+            varValue2 = '';
+            return result
+        case "/": 
+            result = divide(var1, var2);
+            varValue = result;
+            varValue2 = '';
+            return result
     }
 }
