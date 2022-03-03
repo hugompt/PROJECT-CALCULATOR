@@ -132,6 +132,11 @@ function multiply (var1, var2){
 function divide (var1, var2){
     let numb1 = parseFloat(var1);
     let numb2 = parseFloat(var2);
+    if(numb2 == 0){
+        document.getElementById("clear").click();
+        alert("You can't divide by 0!");
+        return 0
+    }
     let result = numb1 / numb2;
     result % 1 != 0 ? result = result.toFixed(2) : result;
     return result
