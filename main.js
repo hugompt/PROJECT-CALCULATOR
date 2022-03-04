@@ -37,8 +37,14 @@ document.getElementById('clear').addEventListener('click', function(){
 
 //Function to change number to negative or back to positive
 document.getElementById('posNeg').addEventListener('click', function(){
-    negNum != true && (screenValue.textContent.includes('-') == false) ? screenValue.insertAdjacentText('afterBegin', '-') : screenValue.textContent = screenValue.textContent.slice(1,screenValue.textContent.length) ;
-    negNum == true ? false : true;
+    alert("Function to turn numbers into negatives, not available yet!");
+    // negNum != true && (screenValue.textContent.includes('-') == false) ? screenValue.insertAdjacentText('afterBegin', '-') : screenValue.textContent = screenValue.textContent.slice(1,screenValue.textContent.length) ;
+    // negNum == true ? false : true;
+});
+
+//Function to calculate the percentage
+document.getElementById('percent').addEventListener('click', function(){
+    alert("Function to use a percentage, not available yet!");
 });
 
 //Check if typed key is a number
@@ -80,6 +86,12 @@ function writeScreen(e){
     
     //Checks if user clicked on a operator symbol;
     }else if(aux1 == '+' || aux1 == '-' || aux1 == '*' || aux1 == '/'){
+        //Add negative to the variables, not working as it should now
+        // if(screenValue.textContent.includes('-') && firstNumber){
+        //     varValue = '-' + varValue;
+        // }else if(screenValue.textContent.includes('-') && firstNumber == false){
+        //     varValue2 = '-' + varValue2;
+        // }
         if(varValue != '' && varValue2 != '' && operatorSymbol != ''){
             screenValue.textContent = operate(varValue,varValue2, operatorSymbol);
             checkSize();
